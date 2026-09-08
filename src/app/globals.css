@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tokens portados de .claude/design-system/gradum-design-system.dc.html, secao 19. */
+:root {
+  /* brand */
+  --gr-graphite-900: #1f252d;
+  --gr-graphite-800: #2e3540;
+  --gr-graphite-700: #4a505c;
+  --gr-graphite-600: #6b7280;
+  --gr-graphite-500: #8a8f9b;
+  --gr-graphite-400: #b4b8c1;
+  --gr-graphite-300: #d8dae0;
+  --gr-graphite-200: #eaebee;
+  --gr-graphite-100: #f5f5f7;
+  --gr-graphite-50: #fafafb;
+  --gr-white: #ffffff;
+  --gr-blue-50: #f2f6ff;
+  --gr-blue-100: #dce7ff;
+  --gr-blue-200: #bdd1ff;
+  --gr-blue-300: #93b3ff;
+  --gr-blue-400: #7aa0ff;
+  --gr-blue-500: #5b8cff;
+  --gr-blue-600: #3e6ee0;
+  --gr-blue-700: #2e55b4;
+  --gr-blue-800: #223f84;
+  --gr-blue-900: #172c5c;
+  --gr-success: #2e9e6b;
+  --gr-warning: #e0a32e;
+  --gr-danger: #dc5a55;
+  --gr-info: #5b8cff;
+
+  /* semantic */
+  --gr-bg: var(--gr-graphite-50);
+  --gr-surface: var(--gr-white);
+  --gr-surface-muted: var(--gr-graphite-100);
+  --gr-border: var(--gr-graphite-200);
+  --gr-text: var(--gr-graphite-900);
+  --gr-text-secondary: var(--gr-graphite-600);
+  --gr-action: var(--gr-blue-500);
+  --gr-action-hover: var(--gr-blue-600);
+  --gr-action-soft: var(--gr-blue-100);
+  --gr-on-action: var(--gr-white);
+
+  /* elevation */
+  --gr-shadow-sm: 0 1px 2px rgba(31, 37, 45, 0.06);
+  --gr-shadow-md: 0 6px 18px rgba(31, 37, 45, 0.08);
+  --gr-shadow-lg: 0 18px 44px rgba(31, 37, 45, 0.14);
+  --gr-shadow-action: 0 8px 20px rgba(91, 140, 255, 0.28);
+  --gr-focus-ring: 0 0 0 4px rgba(91, 140, 255, 0.18);
+
+  /* motion */
+  --gr-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --gr-duration-fast: 120ms;
+  --gr-duration-base: 200ms;
+  --gr-duration-slow: 320ms;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    background-color: var(--gr-bg);
+    color: var(--gr-text);
+    @apply font-sans antialiased;
+  }
+
+  /* Secao 19: texto >= 4.5:1. O anel de foco e o mesmo em todo controle. */
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--gr-focus-ring);
+  }
+}
+
+@layer utilities {
+  /* Secao 07: barra de progresso indeterminada. */
+  @keyframes gradum-indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(300%);
+    }
+  }
+
+  .animate-gradum-indeterminate {
+    animation: gradum-indeterminate 1.4s var(--gr-ease) infinite;
+  }
+}
