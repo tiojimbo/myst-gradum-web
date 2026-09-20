@@ -4,7 +4,7 @@ import { GradumMark } from "@/components/shared/companion-sidebar";
 
 /**
  * Layout centralizado, sem sidebar e sem topbar. Nasce sem pagina dentro:
- * /login e /register sao F0.3.
+ * /login pertence à F0.3.
  */
 function AuthLayout({ children }: { children: ReactNode }) {
   return (

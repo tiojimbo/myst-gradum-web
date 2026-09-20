@@ -6,7 +6,9 @@ import { middleware } from "@/middleware";
 
 function makeRequest(pathname: string, cookie?: string) {
   const url = `https://gradum.test${pathname}`;
-  const headers = cookie ? { cookie: `auth_access_token=${cookie}` } : undefined;
+  const headers = cookie
+    ? { cookie: `auth_access_token=${cookie}` }
+    : undefined;
 
   return new NextRequest(url, { headers });
 }
@@ -17,7 +19,11 @@ describe("middleware", () => {
 
     expect(response.status).toBe(307);
     expect(new URL(response.headers.get("location")!).pathname).toBe("/login");
-    expect(new URL(response.headers.get("location")!).searchParams.get("callbackUrl")).toBe("/");
+    expect(
+      new URL(response.headers.get("location")!).searchParams.get(
+        "callbackUrl",
+      ),
+    ).toBe("/");
   });
 
   it("preserva caminho aninhado no callbackUrl", () => {
@@ -43,10 +49,10 @@ describe("middleware", () => {
     expect(response.headers.get("location")).toBeNull();
   });
 
-  it("redireciona /login com cookie para a raiz", () => {
+  it("permite login com cookie inválido sem loop", () => {
     const response = middleware(makeRequest("/login", "token-valido"));
 
-    expect(response.status).toBe(307);
-    expect(new URL(response.headers.get("location")!).pathname).toBe("/");
+    expect(response.status).toBe(200);
+    expect(response.headers.get("location")).toBeNull();
   });
 });

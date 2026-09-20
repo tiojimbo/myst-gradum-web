@@ -1,3 +1,4 @@
+import { AuthPanel } from "@/features/auth/components/auth-panel";
 import type { ReactNode } from "react";
 
 import { AppSidebar } from "@/components/layout/app-sidebar";
@@ -11,13 +12,15 @@ import { Topbar } from "@/components/layout/topbar";
  */
 function DashboardLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-bg">
-      <AppSidebar />
-      <div className="flex flex-1 flex-col">
-        <Topbar />
-        <MainContent>{children}</MainContent>
+    <AuthPanel>
+      <div className="flex min-h-screen bg-bg">
+        <AppSidebar />
+        <div className="flex flex-1 flex-col">
+          <Topbar />
+          <MainContent>{children}</MainContent>
+        </div>
       </div>
-    </div>
+    </AuthPanel>
   );
 }
 
