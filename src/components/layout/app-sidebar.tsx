@@ -6,13 +6,14 @@ import { cn } from "@/lib/utils";
 interface AppSidebarProps {
   /** href do item ativo. */
   active?: string;
+  onNavigate?: (href: string) => void;
 }
 
 /**
  * Secao 12 do design system: item selecionado recebe fundo Ice Blue, icone
  * Mist Blue e texto Deep Graphite. O icone ativo usa a variante -fill.
  */
-export function AppSidebar({ active = "/hoje" }: AppSidebarProps) {
+export function AppSidebar({ active = "/hoje", onNavigate }: AppSidebarProps) {
   return (
     <nav className="flex w-[232px] flex-none flex-col gap-5 border-r border-border bg-surface p-5">
       <div className="flex items-center gap-2">
@@ -27,7 +28,8 @@ export function AppSidebar({ active = "/hoje" }: AppSidebarProps) {
           return (
             <li key={item.href}>
               <a
-                href={item.href}
+                href={onNavigate ? "#composicoes" : item.href}
+                onClick={onNavigate ? (event) => { event.preventDefault(); onNavigate(item.href); } : undefined}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
                   "flex items-center gap-3 rounded-[10px] px-4 py-[10px] text-sm transition-colors duration-base ease-gradum",

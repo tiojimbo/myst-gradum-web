@@ -17,7 +17,7 @@ type IconSize = keyof typeof ICON_SIZE;
 interface IconProps {
   /** Nome do Remix Icon sem o prefixo, por exemplo "arrow-right". */
   name: string;
-  variant?: "line" | "fill";
+  variant?: "line" | "fill" | "none";
   size?: IconSize;
   className?: string;
 }
@@ -26,7 +26,7 @@ export function Icon({ name, variant = "line", size = "control", className }: Ic
   return (
     <i
       aria-hidden
-      className={cn(`ri-${name}-${variant}`, className)}
+      className={cn(variant === "none" ? `ri-${name}` : `ri-${name}-${variant}`, className)}
       style={{ fontSize: ICON_SIZE[size] }}
     />
   );

@@ -3,9 +3,10 @@ import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 
 /** Secao 12 da especificacao: os cinco tipos rapidos de anotacao. */
-export type NoteKind = "nota" | "duvida" | "importante" | "acao" | "exemplo";
+export type NoteKind = "nota" | "duvida" | "importante" | "acao" | "exemplo" | "erro";
 
 const KIND: Record<NoteKind, { label: string; icon: string; className: string }> = {
+  erro: { label: "Erro", icon: "error-warning", className: "bg-[var(--gr-danger-soft)] text-[var(--gr-danger-ink)]" },
   nota: { label: "Nota", icon: "sticky-note", className: "bg-graphite-100 text-graphite-700" },
   duvida: { label: "Dúvida", icon: "question", className: "bg-[#FBF1DC] text-[#8A6414]" },
   importante: { label: "Importante", icon: "star", className: "bg-blue-100 text-blue-700" },

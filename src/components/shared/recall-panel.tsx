@@ -1,0 +1,5 @@
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
+export function RecallPanel({ question, value, onChange, onSubmit, onSpeak }: { question: string; value: string; onChange: (value: string) => void; onSubmit?: () => void; onSpeak?: () => void }) {
+  return <div className="space-y-5 rounded-xl bg-graphite-900 p-5 text-white"><p className="text-overline font-bold uppercase tracking-[.2em] text-blue-400">Recall</p><label className="block space-y-4"><strong className="block text-h3">{question}</strong><textarea value={value} onChange={(event) => onChange(event.target.value)} placeholder="Sem consultar suas notas…" className="min-h-[120px] w-full resize-y rounded-[14px] border border-graphite-700 bg-graphite-800 p-4 text-sm text-white" /></label><div className="flex flex-wrap gap-3"><Button onClick={onSubmit}>Enviar resposta</Button><Button variant="ghost" className="text-blue-200" onClick={onSpeak}><Icon name="mic" />Responder falando</Button></div></div>;
+}
