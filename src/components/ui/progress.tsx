@@ -5,7 +5,9 @@ interface ProgressProps {
   value?: number;
   indeterminate?: boolean;
   /** Secao 07: a barra de maestria atingida usa verde em vez de azul. */
-  tone?: "action" | "success";
+  tone?: "action" | "success" | "soft";
+  onDark?: boolean;
+  size?: "md" | "sm" | "xs";
   className?: string;
   label?: string;
 }
@@ -15,6 +17,8 @@ export function Progress({
   indeterminate = false,
   tone = "action",
   className,
+  onDark = false,
+  size = "md",
   label,
 }: ProgressProps) {
   const clamped = Math.min(100, Math.max(0, value));
@@ -26,15 +30,15 @@ export function Progress({
       aria-valuemax={100}
       aria-valuenow={indeterminate ? undefined : clamped}
       aria-label={label}
-      className={cn("h-2 overflow-hidden rounded-full bg-graphite-200", className)}
+      className={cn("overflow-hidden rounded-full", size === "xs" ? "h-[6px]" : size === "sm" ? "h-[8px]" : "h-[10px]", onDark ? "bg-graphite-700" : "bg-graphite-200", className)}
     >
       {indeterminate ? (
-        <div className={cn("h-full w-1/3 rounded-full", tone === "success" ? "bg-success" : "bg-action", "animate-gradum-indeterminate")} />
+        <div className={cn("h-full w-1/3 rounded-full", tone === "success" ? "bg-success" : tone === "soft" ? "bg-blue-200" : "bg-action", "animate-gradum-indeterminate")} />
       ) : (
         <div
           className={cn(
             "h-full rounded-full transition-[width] duration-slow ease-gradum",
-            tone === "success" ? "bg-success" : "bg-action",
+            tone === "success" ? "bg-success" : tone === "soft" ? "bg-blue-200" : "bg-action",
           )}
           style={{ width: `${clamped}%` }}
         />
@@ -57,7 +61,7 @@ export function Stepper({ current, total, className }: StepperProps) {
           key={index}
           className={cn(
             "h-2 flex-1 rounded-full transition-colors duration-base ease-gradum",
-            index < current ? "bg-action" : "bg-graphite-200",
+            index < current ? "bg-action" : index === current ? "bg-blue-200" : "bg-graphite-200",
           )}
         />
       ))}

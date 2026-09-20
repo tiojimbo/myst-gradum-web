@@ -21,6 +21,7 @@ interface ConfirmDialogProps {
   isLoading?: boolean;
   confirmLabel?: string;
   cancelLabel?: string;
+  onCloseAutoFocus?: (event: Event) => void;
 }
 
 export function ConfirmDialog({
@@ -33,10 +34,11 @@ export function ConfirmDialog({
   isLoading = false,
   confirmLabel = "Confirmar",
   cancelLabel = "Cancelar",
+  onCloseAutoFocus,
 }: ConfirmDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent onCloseAutoFocus={onCloseAutoFocus}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>

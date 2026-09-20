@@ -19,6 +19,7 @@ interface DataTableProps<T> {
   endpoint: string;
   descriptor: DataTableDescriptor<T>;
   defaultLimit?: number;
+  localData?: { rows: T[]; state?: "ready" | "loading" | "error" };
   getRowId?: (row: T, index: number) => string | number;
 }
 
@@ -27,6 +28,7 @@ export function DataTable<T>({
   endpoint,
   descriptor,
   defaultLimit,
+  localData,
   getRowId = (_row, index) => index,
 }: DataTableProps<T>) {
   const {
@@ -41,7 +43,7 @@ export function DataTable<T>({
     toggleSort,
     filters,
     setFilter,
-  } = useDataTable<T>({ queryKey, endpoint, descriptor, defaultLimit });
+  } = useDataTable<T>({ queryKey, endpoint, descriptor, defaultLimit, localData });
 
   const hasActions = Boolean(descriptor.actions && descriptor.actions.length > 0);
 
